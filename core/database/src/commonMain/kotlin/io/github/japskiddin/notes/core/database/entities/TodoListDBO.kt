@@ -12,6 +12,7 @@ import androidx.room.PrimaryKey
 public data class TodoListDBO(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = COLUMN_UID) val uid: Long,
+    @ColumnInfo(name = COLUMN_TITLE) val title: String,
     @ColumnInfo(name = COLUMN_DESCRIPTION) val description: String,
     @ColumnInfo(name = COLUMN_TIMESTAMP) val timestamp: Long,
     @ColumnInfo(name = COLUMN_LIST) val list: List<TodoDBO>,
@@ -20,6 +21,7 @@ public data class TodoListDBO(
         internal const val TABLE_NAME: String = "todo_list"
 
         internal const val COLUMN_UID: String = "uid"
+        internal const val COLUMN_TITLE: String = "title"
         internal const val COLUMN_DESCRIPTION: String = "description"
         internal const val COLUMN_TIMESTAMP: String = "timestamp"
         internal const val COLUMN_LIST: String = "list"

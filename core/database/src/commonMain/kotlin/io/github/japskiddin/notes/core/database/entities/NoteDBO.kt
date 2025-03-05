@@ -12,6 +12,7 @@ import androidx.room.PrimaryKey
 public data class NoteDBO(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = COLUMN_UID) val uid: Long,
+    @ColumnInfo(name = COLUMN_TITLE) val title: String,
     @ColumnInfo(name = COLUMN_TEXT) val text: String,
     @ColumnInfo(name = COLUMN_TIMESTAMP) val timestamp: Long,
 ) {
@@ -19,6 +20,7 @@ public data class NoteDBO(
         internal const val TABLE_NAME: String = "note"
 
         internal const val COLUMN_UID: String = "uid"
+        internal const val COLUMN_TITLE: String = "title"
         internal const val COLUMN_TEXT: String = "text"
         internal const val COLUMN_TIMESTAMP: String = "timestamp"
     }
