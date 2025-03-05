@@ -72,6 +72,7 @@ android {
 
 dependencies {
     debugImplementation(compose.uiTooling)
+    implementation(projects.core.database)
 }
 
 compose.desktop {

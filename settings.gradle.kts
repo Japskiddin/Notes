@@ -28,4 +28,7 @@ dependencyResolutionManagement {
     }
 }
 
-include(":app")
+include(
+    ":app",
+    ":core:database"
+)
