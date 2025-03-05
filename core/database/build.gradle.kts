@@ -18,12 +18,15 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_21)
         }
     }
+    jvm("desktop")
 
     sourceSets {
         commonMain.dependencies {
             implementation(libs.androidx.room.runtime)
             implementation(libs.sqlite.bundled)
             implementation(libs.sqlite)
+            implementation(libs.koin.core)
+            implementation(libs.kotlinx.coroutines.core)
         }
     }
 
