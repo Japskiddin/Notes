@@ -14,9 +14,9 @@ internal actual fun platformDatabaseModule(): Module =
         }
     }
 
-private fun getDatabaseBuilder(): RoomDatabase.Builder<AppDatabase> {
+private fun getDatabaseBuilder(): RoomDatabase.Builder<AppRoomDatabase> {
     val dbFile = File(System.getProperty("java.io.tmpdir"), DATABASE_NAME)
-    return Room.databaseBuilder<AppDatabase>(
+    return Room.databaseBuilder<AppRoomDatabase>(
         name = dbFile.absolutePath,
     )
 }

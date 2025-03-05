@@ -16,10 +16,10 @@ internal actual fun platformDatabaseModule(): Module =
 
 private fun getDatabaseBuilder(
     context: Context,
-): RoomDatabase.Builder<AppDatabase> {
+): RoomDatabase.Builder<AppRoomDatabase> {
     val appContext = context.applicationContext
     val dbFile = appContext.getDatabasePath(DATABASE_NAME)
-    return Room.databaseBuilder<AppDatabase>(
+    return Room.databaseBuilder<AppRoomDatabase>(
         context = appContext,
         name = dbFile.absolutePath,
     )
