@@ -6,7 +6,6 @@ import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import io.github.japskiddin.notes.core.database.dao.NoteDao
 import io.github.japskiddin.notes.core.database.entities.NoteDBO
 import kotlinx.coroutines.Dispatchers
-import org.koin.core.module.Module
 
 private const val DATABASE_VERSION: Int = 1
 internal const val DATABASE_NAME = "database.db"
@@ -37,5 +36,3 @@ internal fun AppDatabase(
         .build()
     return AppDatabase(roomDatabase)
 }
-
-internal expect fun platformDatabaseModule(): Module
