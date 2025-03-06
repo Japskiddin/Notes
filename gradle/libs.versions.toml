@@ -44,8 +44,8 @@ android-minSdk = "21"
 android-compileSdk = "35"
 android-targetSdk = "35"
 
-appVersion-name = "0.0.1"
-appVersion-code = "1"
+app-versionName = "1.0.0"
+app-versionCode = "1"
 
 jvm = "21"
 
@@ -151,7 +151,7 @@ compose = [
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 android-test = { id = "com.android.test", version.ref = "agp" }
-compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
+jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }

@@ -47,4 +47,5 @@ android {
 
 dependencies {
     add("kspAndroid", libs.androidx.room.compiler)
+    add("kspDesktop", libs.androidx.room.compiler)
 }
