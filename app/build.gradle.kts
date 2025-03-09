@@ -27,6 +27,8 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
+            implementation(projects.core.model)
+            implementation(projects.core.domain)
             implementation(projects.core.database)
         }
         androidMain.dependencies {
