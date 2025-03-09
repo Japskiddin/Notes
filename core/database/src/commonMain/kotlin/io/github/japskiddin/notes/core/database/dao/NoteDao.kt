@@ -7,6 +7,6 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 public interface NoteDao {
-    @Query("SELECT * FROM ${NoteDBO.TABLE_NAME}")
+    @Query("SELECT * FROM note")
     public fun get(): Flow<List<NoteDBO>>
 }

@@ -8,29 +8,20 @@ import androidx.room.PrimaryKey
 
 @Keep
 @Entity(
-    tableName = TaskDBO.TABLE_NAME,
+    tableName = "task",
     foreignKeys = [
         ForeignKey(
             entity = TodoDBO::class,
-            parentColumns = arrayOf(TodoDBO.COLUMN_UID),
-            childColumns = arrayOf(TaskDBO.COLUMN_TODO_UID),
+            parentColumns = arrayOf("uid"),
+            childColumns = arrayOf("todo_uid"),
             onDelete = ForeignKey.CASCADE
         )
     ]
 )
 public data class TaskDBO(
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = COLUMN_UID) val uid: Long,
-    @ColumnInfo(name = COLUMN_TODO_UID) val todoUid: Long,
-    @ColumnInfo(name = COLUMN_STATUS) val status: Int,
-    @ColumnInfo(name = COLUMN_TEXT) val text: String,
-) {
-    internal companion object {
-        internal const val TABLE_NAME: String = "task"
-
-        internal const val COLUMN_UID: String = "uid"
-        internal const val COLUMN_TODO_UID: String = "todo_uid"
-        internal const val COLUMN_STATUS: String = "status"
-        internal const val COLUMN_TEXT: String = "text"
-    }
-}
+    @ColumnInfo(name = "uid") val uid: Long,
+    @ColumnInfo(name = "todo_uid", index = true) val todoUid: Long,
+    @ColumnInfo(name = "status") val status: Int,
+    @ColumnInfo(name = "text") val text: String,
+)
