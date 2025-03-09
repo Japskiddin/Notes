@@ -22,7 +22,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(libs.androidx.room.runtime)
+            implementation(libs.room.runtime)
             implementation(libs.sqlite.bundled)
             implementation(libs.sqlite)
             implementation(libs.koin.core)
@@ -50,6 +50,6 @@ android {
 }
 
 dependencies {
-    add("kspAndroid", libs.androidx.room.compiler)
-    add("kspDesktop", libs.androidx.room.compiler)
+    add("kspAndroid", libs.room.compiler)
+    add("kspDesktop", libs.room.compiler)
 }
