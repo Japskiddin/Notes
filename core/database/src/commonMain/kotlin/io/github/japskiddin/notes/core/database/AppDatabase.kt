@@ -4,7 +4,9 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import io.github.japskiddin.notes.core.database.dao.NoteDao
+import io.github.japskiddin.notes.core.database.dao.TodoDao
 import io.github.japskiddin.notes.core.database.entities.NoteDBO
+import io.github.japskiddin.notes.core.database.entities.TodoDBO
 import kotlinx.coroutines.Dispatchers
 
 private const val DATABASE_VERSION: Int = 1
@@ -12,12 +14,15 @@ internal const val DATABASE_NAME = "database.db"
 
 @Database(
     entities = [
-        NoteDBO::class
+        NoteDBO::class,
+        TodoDBO::class,
     ],
     version = DATABASE_VERSION
 )
 internal abstract class AppRoomDatabase : RoomDatabase() {
     abstract fun noteDao(): NoteDao
+
+    abstract fun todoDao(): TodoDao
 }
 
 public class AppDatabase internal constructor(
@@ -25,6 +30,9 @@ public class AppDatabase internal constructor(
 ) {
     public val noteDao: NoteDao
         get() = database.noteDao()
+
+    public val todoDao: TodoDao
+        get() = database.todoDao()
 }
 
 internal fun AppDatabase(

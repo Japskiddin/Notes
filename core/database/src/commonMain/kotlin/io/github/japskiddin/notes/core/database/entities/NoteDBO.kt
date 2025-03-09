@@ -15,6 +15,10 @@ public data class NoteDBO(
     @ColumnInfo(name = COLUMN_TITLE) val title: String,
     @ColumnInfo(name = COLUMN_TEXT) val text: String,
     @ColumnInfo(name = COLUMN_TIMESTAMP) val timestamp: Long,
+    @ColumnInfo(name = COLUMN_PINNED) val pinned: Boolean,
+    @ColumnInfo(name = COLUMN_CREATE_TIME) val createTime: Long,
+    @ColumnInfo(name = COLUMN_EDIT_TIME) val editTime: Long,
+    @ColumnInfo(name = COLUMN_CATEGORY) val category: String
 ) {
     internal companion object {
         internal const val TABLE_NAME: String = "note"
@@ -23,5 +27,9 @@ public data class NoteDBO(
         internal const val COLUMN_TITLE: String = "title"
         internal const val COLUMN_TEXT: String = "text"
         internal const val COLUMN_TIMESTAMP: String = "timestamp"
+        internal const val COLUMN_PINNED: String = "pinned"
+        internal const val COLUMN_CREATE_TIME: String = "create_time"
+        internal const val COLUMN_EDIT_TIME: String = "edit_time"
+        internal const val COLUMN_CATEGORY: String = "category"
     }
 }

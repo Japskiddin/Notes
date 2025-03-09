@@ -3,34 +3,33 @@ package io.github.japskiddin.notes.core.database.entities
 import androidx.annotation.Keep
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
 @Keep
 @Entity(
-    tableName = TodoDBO.TABLE_NAME,
-    foreignKeys = [
-        ForeignKey(
-            entity = TodoListDBO::class,
-            parentColumns = arrayOf(TodoListDBO.COLUMN_UID),
-            childColumns = arrayOf(TodoDBO.COLUMN_LIST_UID),
-            onDelete = ForeignKey.CASCADE
-        )
-    ]
+    tableName = TodoDBO.TABLE_NAME
 )
 public data class TodoDBO(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = COLUMN_UID) val uid: Long,
-    @ColumnInfo(name = COLUMN_LIST_UID) val listUid: Long,
-    @ColumnInfo(name = COLUMN_STATUS) val status: Int,
-    @ColumnInfo(name = COLUMN_TEXT) val text: String,
+    @ColumnInfo(name = COLUMN_TITLE) val title: String,
+    @ColumnInfo(name = COLUMN_DESCRIPTION) val description: String,
+    @ColumnInfo(name = COLUMN_TIMESTAMP) val timestamp: Long,
+    @ColumnInfo(name = COLUMN_PINNED) val pinned: Boolean,
+    @ColumnInfo(name = COLUMN_CREATE_TIME) val createTime: Long,
+    @ColumnInfo(name = COLUMN_EDIT_TIME) val editTime: Long,
+    @ColumnInfo(name = COLUMN_CATEGORY) val category: String
 ) {
     internal companion object {
         internal const val TABLE_NAME: String = "todo"
 
         internal const val COLUMN_UID: String = "uid"
-        internal const val COLUMN_LIST_UID: String = "list_uid"
-        internal const val COLUMN_STATUS: String = "status"
-        internal const val COLUMN_TEXT: String = "text"
+        internal const val COLUMN_TITLE: String = "title"
+        internal const val COLUMN_DESCRIPTION: String = "description"
+        internal const val COLUMN_TIMESTAMP: String = "timestamp"
+        internal const val COLUMN_PINNED: String = "pinned"
+        internal const val COLUMN_CREATE_TIME: String = "create_time"
+        internal const val COLUMN_EDIT_TIME: String = "edit_time"
+        internal const val COLUMN_CATEGORY: String = "category"
     }
 }
