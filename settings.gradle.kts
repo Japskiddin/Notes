@@ -30,5 +30,7 @@ dependencyResolutionManagement {
 
 include(
     ":app",
-    ":core:database"
+    ":core:database",
+    ":core:model",
+    ":core:domain",
 )

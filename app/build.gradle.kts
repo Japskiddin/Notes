@@ -1,5 +1,4 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.io.FileInputStream
 import java.util.*
 
@@ -11,11 +10,7 @@ plugins {
 }
 
 kotlin {
-    androidTarget {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_21)
-        }
-    }
+    androidTarget()
     jvm("desktop")
 
     sourceSets {
@@ -46,6 +41,8 @@ kotlin {
             implementation(libs.kotlinx.coroutines.swing)
         }
     }
+
+    jvmToolchain(21)
 }
 
 android {
@@ -157,11 +154,6 @@ android {
     dependenciesInfo {
         includeInApk = false
         includeInBundle = false
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
     }
 
     applicationVariants.all {
