@@ -1,5 +1,6 @@
-package io.github.japskiddin.notes.core.database
+package io.github.japskiddin.notes.core.database.di
 
+import io.github.japskiddin.notes.core.database.AppDatabase
 import io.github.japskiddin.notes.core.database.dao.NoteDao
 import io.github.japskiddin.notes.core.database.dao.TaskDao
 import io.github.japskiddin.notes.core.database.dao.TodoDao

@@ -1,6 +1,6 @@
 package io.github.japskiddin.notes
 
-import io.github.japskiddin.notes.core.database.databaseModule
+import io.github.japskiddin.notes.core.database.di.databaseModule
 import org.koin.core.module.Module
 
 private val coreModules: List<Module>
