@@ -4,7 +4,6 @@ public data class Todo(
     val uid: Long,
     val title: String,
     val description: String,
-    val timestamp: Long,
     val pinned: Boolean,
     val createTime: Long,
     val editTime: Long,

@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "19f21bc2f563cd0fc7f4ba3d4f80f69a",
+    "identityHash": "f4157d5e2b135a70d4e933074d017f1d",
     "entities": [
       {
         "tableName": "note",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `text` TEXT NOT NULL, `timestamp` INTEGER NOT NULL, `pinned` INTEGER NOT NULL, `create_time` INTEGER NOT NULL, `edit_time` INTEGER NOT NULL, `category` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `text` TEXT NOT NULL, `pinned` INTEGER NOT NULL, `create_time` INTEGER NOT NULL, `edit_time` INTEGER NOT NULL, `category` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "uid",
@@ -24,12 +24,6 @@
             "fieldPath": "text",
             "columnName": "text",
             "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "timestamp",
-            "columnName": "timestamp",
-            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -66,7 +60,7 @@
       },
       {
         "tableName": "todo",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `description` TEXT NOT NULL, `timestamp` INTEGER NOT NULL, `pinned` INTEGER NOT NULL, `create_time` INTEGER NOT NULL, `edit_time` INTEGER NOT NULL, `category` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `description` TEXT NOT NULL, `pinned` INTEGER NOT NULL, `create_time` INTEGER NOT NULL, `edit_time` INTEGER NOT NULL, `category` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "uid",
@@ -84,12 +78,6 @@
             "fieldPath": "description",
             "columnName": "description",
             "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "timestamp",
-            "columnName": "timestamp",
-            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -187,7 +175,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '19f21bc2f563cd0fc7f4ba3d4f80f69a')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f4157d5e2b135a70d4e933074d017f1d')"
     ]
   }
 }

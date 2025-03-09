@@ -33,4 +33,5 @@ include(
     ":core:database",
     ":core:model",
     ":core:domain",
+    ":core:data",
 )

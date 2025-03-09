@@ -11,7 +11,10 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
+            implementation(projects.core.database)
+            implementation(projects.core.domain)
             implementation(projects.core.model)
         }
     }
@@ -21,7 +24,7 @@ kotlin {
 }
 
 android {
-    namespace = "io.github.japskiddin.notes.core.domain"
+    namespace = "io.github.japskiddin.notes.core.data"
 
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 

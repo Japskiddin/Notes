@@ -4,7 +4,6 @@ public data class Note(
     val uid: Long,
     val title: String,
     val text: String,
-    val timestamp: Long,
     val pinned: Boolean,
     val createTime: Long,
     val editTime: Long,

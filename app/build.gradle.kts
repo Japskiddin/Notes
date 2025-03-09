@@ -30,6 +30,7 @@ kotlin {
             implementation(projects.core.model)
             implementation(projects.core.domain)
             implementation(projects.core.database)
+            implementation(projects.core.data)
         }
         androidMain.dependencies {
             implementation(compose.preview)

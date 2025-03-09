@@ -14,7 +14,6 @@ public data class TodoDBO(
     @ColumnInfo(name = "uid") val uid: Long,
     @ColumnInfo(name = "title") val title: String,
     @ColumnInfo(name = "description") val description: String,
-    @ColumnInfo(name = "timestamp") val timestamp: Long,
     @ColumnInfo(name = "pinned") val pinned: Boolean,
     @ColumnInfo(name = "create_time") val createTime: Long,
     @ColumnInfo(name = "edit_time") val editTime: Long,
