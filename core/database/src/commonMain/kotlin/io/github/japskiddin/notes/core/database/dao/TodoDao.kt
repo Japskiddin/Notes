@@ -9,11 +9,11 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 public interface TodoDao {
     @Query("SELECT * FROM todo")
-    public fun get(): Flow<List<TodoDBO>>
+    public fun getAll(): Flow<List<TodoDBO>>
 
     @Query(
         "SELECT * FROM todo " +
             "JOIN task ON todo.uid = task.todo_uid"
     )
-    public fun getWithTasks(): Flow<Map<TodoDBO, List<TaskDBO>>>
+    public fun getAllWithTasks(): Flow<Map<TodoDBO, List<TaskDBO>>>
 }

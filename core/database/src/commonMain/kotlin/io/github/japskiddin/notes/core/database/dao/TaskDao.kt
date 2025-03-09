@@ -8,5 +8,5 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 public interface TaskDao {
     @Query("SELECT * FROM task")
-    public fun get(): Flow<List<TaskDBO>>
+    public fun getAll(): Flow<List<TaskDBO>>
 }
