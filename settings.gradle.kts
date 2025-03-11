@@ -34,4 +34,7 @@ include(
     ":core:model",
     ":core:domain",
     ":core:data",
+    ":feature:home:ui",
+    ":feature:home:ui-logic",
+    ":feature:home:domain",
 )

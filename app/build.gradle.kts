@@ -31,6 +31,9 @@ kotlin {
             implementation(projects.core.domain)
             implementation(projects.core.database)
             implementation(projects.core.data)
+            implementation(projects.feature.home.ui)
+            implementation(projects.feature.home.uiLogic)
+            implementation(projects.feature.home.domain)
         }
         androidMain.dependencies {
             implementation(compose.preview)
