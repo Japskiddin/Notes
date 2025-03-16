@@ -17,10 +17,10 @@ kotlin {
         commonMain.dependencies {
             implementation(project.dependencies.platform(libs.koin.bom))
             implementation(projects.core.domain)
-            implementation(projects.core.model)
+            api(projects.core.model)
             implementation(projects.core.common)
-            implementation(libs.androidx.lifecycle.runtime)
-            implementation(libs.androidx.lifecycle.viewmodel)
+            api(libs.androidx.lifecycle.runtime)
+            api(libs.androidx.lifecycle.viewmodel)
             api(libs.koin.core.viewmodel)
         }
 
@@ -38,6 +38,5 @@ android {
 
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()
-        consumerProguardFiles("consumer-rules.pro")
     }
 }
