@@ -13,13 +13,15 @@ import io.github.japskiddin.notes.core.domain.TaskRepository
 import io.github.japskiddin.notes.core.domain.TodoDataSource
 import io.github.japskiddin.notes.core.domain.TodoRepository
 import org.koin.core.module.Module
+import org.koin.core.module.dsl.bind
+import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
 
 public val repositoryModule: Module = module {
-    factory<NoteDataSource> { NoteDataSourceImpl(get()) }
-    factory<NoteRepository> { NoteRepositoryImpl(get()) }
-    factory<TaskDataSource> { TaskDataSourceImpl(get()) }
-    factory<TaskRepository> { TaskRepositoryImpl(get()) }
-    factory<TodoDataSource> { TodoDataSourceImpl(get()) }
-    factory<TodoRepository> { TodoRepositoryImpl(get()) }
+    factoryOf(::NoteDataSourceImpl) { bind<NoteDataSource>() }
+    factoryOf(::NoteRepositoryImpl) { bind<NoteRepository>() }
+    factoryOf(::TaskDataSourceImpl) { bind<TaskDataSource>() }
+    factoryOf(::TaskRepositoryImpl) { bind<TaskRepository>() }
+    factoryOf(::TodoDataSourceImpl) { bind<TodoDataSource>() }
+    factoryOf(::TodoRepositoryImpl) { bind<TodoRepository>() }
 }
