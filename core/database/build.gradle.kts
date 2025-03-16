@@ -12,8 +12,12 @@ room {
 }
 
 kotlin {
+    explicitApi = ExplicitApiMode.Strict
+
+    jvmToolchain(21)
+
     androidTarget()
-    jvm("desktop")
+    jvm()
 
     sourceSets {
         commonMain.dependencies {
@@ -24,9 +28,6 @@ kotlin {
             implementation(libs.kotlinx.coroutines.core)
         }
     }
-
-    jvmToolchain(21)
-    explicitApi = ExplicitApiMode.Strict
 }
 
 android {
@@ -42,5 +43,5 @@ android {
 
 dependencies {
     add("kspAndroid", libs.androidx.room.compiler)
-    add("kspDesktop", libs.androidx.room.compiler)
+    add("kspJvm", libs.androidx.room.compiler)
 }

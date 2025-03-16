@@ -2,7 +2,7 @@ package io.github.japskiddin.notes.core.common
 
 import java.io.PrintStream
 
-public class PrintLogger(
+internal class PrintLogger(
     private val outStream: PrintStream = System.out
 ) : Logger {
     private fun printMessage(

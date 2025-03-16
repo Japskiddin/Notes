@@ -6,16 +6,17 @@ plugins {
 }
 
 kotlin {
+    explicitApi = ExplicitApiMode.Strict
+
+    jvmToolchain(21)
+
     androidTarget()
-    jvm("desktop")
+    jvm()
 
     sourceSets {
         commonMain.dependencies {
         }
     }
-
-    jvmToolchain(21)
-    explicitApi = ExplicitApiMode.Strict
 }
 
 android {

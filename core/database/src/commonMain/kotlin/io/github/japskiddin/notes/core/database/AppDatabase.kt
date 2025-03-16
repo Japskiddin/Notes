@@ -30,16 +30,16 @@ internal abstract class AppRoomDatabase : RoomDatabase() {
     abstract fun taskDao(): TaskDao
 }
 
-public class AppDatabase internal constructor(
+internal class AppDatabase internal constructor(
     private val database: AppRoomDatabase
 ) {
-    public val noteDao: NoteDao
+    val noteDao: NoteDao
         get() = database.noteDao()
 
-    public val todoDao: TodoDao
+    val todoDao: TodoDao
         get() = database.todoDao()
 
-    public val taskDao: TaskDao
+    val taskDao: TaskDao
         get() = database.taskDao()
 }
 

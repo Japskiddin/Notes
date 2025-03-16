@@ -10,6 +10,8 @@ plugins {
 }
 
 kotlin {
+    jvmToolchain(21)
+
     androidTarget()
     jvm("desktop")
 
@@ -36,6 +38,7 @@ kotlin {
             implementation(projects.feature.home.uiLogic)
             implementation(projects.feature.home.domain)
         }
+
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
@@ -43,13 +46,12 @@ kotlin {
             implementation(libs.koin.android.compose)
             implementation(libs.koin.android.navigation)
         }
+
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
         }
     }
-
-    jvmToolchain(21)
 }
 
 android {
