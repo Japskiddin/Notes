@@ -19,6 +19,7 @@ kotlin {
         val desktopMain by getting
 
         commonMain.dependencies {
+            implementation(project.dependencies.platform(libs.koin.bom))
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material)
@@ -36,15 +37,14 @@ kotlin {
             implementation(projects.core.data)
             implementation(projects.feature.home.ui)
             implementation(projects.feature.home.uiLogic)
-            implementation(projects.feature.home.domain)
         }
 
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.koin.android)
-            implementation(libs.koin.android.compose)
-            implementation(libs.koin.android.navigation)
+            implementation(libs.koin.androidx.compose)
+            implementation(libs.koin.androidx.navigation)
         }
 
         desktopMain.dependencies {

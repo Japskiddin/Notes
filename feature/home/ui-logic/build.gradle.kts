@@ -15,6 +15,18 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            implementation(project.dependencies.platform(libs.koin.bom))
+            implementation(projects.core.domain)
+            implementation(projects.core.model)
+            implementation(projects.core.common)
+            implementation(libs.androidx.lifecycle.runtime)
+            implementation(libs.androidx.lifecycle.viewmodel)
+            api(libs.koin.core.viewmodel)
+        }
+
+        androidMain.dependencies {
+            implementation(libs.androidx.core.ktx)
+            api(libs.koin.android)
         }
     }
 }

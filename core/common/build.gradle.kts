@@ -15,6 +15,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            implementation(project.dependencies.platform(libs.koin.bom))
             api(libs.kotlinx.coroutines.core)
             api(libs.kotlinx.immutable)
             api(libs.koin.core)
