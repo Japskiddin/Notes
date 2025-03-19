@@ -19,8 +19,11 @@ kotlin {
         commonMain.dependencies {
             implementation(project.dependencies.platform(libs.koin.bom))
             implementation(project.dependencies.platform(libs.androidx.compose.bom))
-            implementation(projects.feature.home.uiLogic)
             implementation(projects.core.uikit)
+            implementation(projects.core.domain)
+            implementation(projects.core.data)
+            implementation(libs.decompose)
+            implementation(libs.decompose.extensions.compose)
             implementation(libs.koin.compose)
             implementation(compose.components.resources)
         }
@@ -32,7 +35,7 @@ kotlin {
 }
 
 android {
-    namespace = "io.github.japskiddin.notes.feature.home.ui"
+    namespace = "io.github.japskiddin.notes.feature.home"
 
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 

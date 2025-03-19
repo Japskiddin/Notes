@@ -38,6 +38,5 @@ include(
     ":core:ui",
     ":core:uikit",
     ":core:utils",
-    ":feature:home:ui",
-    ":feature:home:ui-logic",
+    ":feature:home",
 )

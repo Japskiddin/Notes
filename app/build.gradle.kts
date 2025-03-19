@@ -4,6 +4,7 @@ import java.util.*
 
 plugins {
     alias(libs.plugins.jetbrains.kotlin.multiplatform)
+    alias(libs.plugins.jetbrains.kotlin.serialization)
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.jetbrains.compose.compiler)
@@ -26,8 +27,11 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+            implementation(libs.decompose)
+            implementation(libs.decompose.extensions.compose)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
+            implementation(libs.kotlinx.serialization.json)
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(projects.core.common)
@@ -35,8 +39,7 @@ kotlin {
             implementation(projects.core.domain)
             implementation(projects.core.database)
             implementation(projects.core.data)
-            implementation(projects.feature.home.ui)
-            implementation(projects.feature.home.uiLogic)
+            implementation(projects.feature.home)
         }
 
         androidMain.dependencies {
