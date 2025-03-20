@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
 
 plugins {
     alias(libs.plugins.jetbrains.kotlin.multiplatform)
+    alias(libs.plugins.jetbrains.kotlin.serialization)
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.jetbrains.compose.compiler)
@@ -22,6 +23,7 @@ kotlin {
             implementation(projects.core.uikit)
             implementation(projects.core.domain)
             implementation(projects.core.data)
+            implementation(libs.kotlinx.serialization.json)
             implementation(libs.decompose)
             implementation(libs.decompose.extensions.compose)
             implementation(libs.koin.compose)

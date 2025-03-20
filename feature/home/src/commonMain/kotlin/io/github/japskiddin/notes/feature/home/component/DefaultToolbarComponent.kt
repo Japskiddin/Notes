@@ -4,4 +4,7 @@ import com.arkivanov.decompose.ComponentContext
 
 internal class DefaultToolbarComponent(
     componentContext: ComponentContext,
-) : ToolbarComponent, ComponentContext by componentContext
+) : ToolbarComponent, ComponentContext by componentContext {
+    override fun onSettingsClick() {
+    }
+}
