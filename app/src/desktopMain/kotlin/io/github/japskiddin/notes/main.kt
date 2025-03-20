@@ -9,6 +9,7 @@ import com.arkivanov.decompose.extensions.compose.lifecycle.LifecycleController
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import io.github.japskiddin.notes.component.RootComponent
 import io.github.japskiddin.notes.di.appModules
+import io.github.japskiddin.notes.utils.runOnUiThread
 import org.koin.core.context.startKoin
 import org.koin.java.KoinJavaComponent.inject
 
@@ -20,9 +21,11 @@ fun main() {
     val lifecycle = LifecycleRegistry()
 
     val rootComponentFactory: RootComponent.Factory by inject(RootComponent.Factory::class.java)
-    val rootComponent = rootComponentFactory(
-        componentContext = DefaultComponentContext(lifecycle),
-    )
+    val rootComponent = runOnUiThread {
+        rootComponentFactory(
+            componentContext = DefaultComponentContext(lifecycle),
+        )
+    }
 
     application {
         val windowState = rememberWindowState()
