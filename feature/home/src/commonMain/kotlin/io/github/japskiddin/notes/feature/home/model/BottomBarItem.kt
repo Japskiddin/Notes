@@ -5,16 +5,16 @@ import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.ui.graphics.vector.ImageVector
 
-internal sealed class BottomBarItem(
-    val title: String,
-    val icon: ImageVector,
+public sealed class BottomBarItem(
+    public val title: String,
+    public val icon: ImageVector,
 ) {
-    data object Notes : BottomBarItem(
+    public data object Notes : BottomBarItem(
         title = "Notes",
         icon = Icons.Default.Create,
     )
 
-    data object Todo : BottomBarItem(
+    public data object Todo : BottomBarItem(
         title = "Todo",
         icon = Icons.Default.Home,
     )

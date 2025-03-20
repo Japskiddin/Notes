@@ -4,8 +4,10 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.childContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
+import com.arkivanov.decompose.router.stack.bringToFront
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.value.Value
+import io.github.japskiddin.notes.feature.home.model.BottomBarItem
 import kotlinx.serialization.Serializable
 
 internal class DefaultHomeComponent(
@@ -42,6 +44,13 @@ internal class DefaultHomeComponent(
     override val bottomBarComponent: BottomBarComponent = DefaultBottomBarComponent(
         childContext(key = "bottomBar")
     )
+
+    override fun onSelectTab(tab: BottomBarItem) =
+        when (tab) {
+            is BottomBarItem.Notes -> navigation.bringToFront(Config.Notes)
+
+            is BottomBarItem.Todo -> navigation.bringToFront(Config.Todo)
+        }
 
     @Serializable
     internal sealed interface Config {

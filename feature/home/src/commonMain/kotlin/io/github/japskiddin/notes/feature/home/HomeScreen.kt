@@ -45,7 +45,9 @@ public fun HomeScreen(
                 items = listOf(
                     BottomBarItem.Notes,
                     BottomBarItem.Todo,
-                )
+                ),
+                onSelect = { item ->
+                }
             )
         }
     ) { paddingValues ->
@@ -104,8 +106,9 @@ private fun ToolbarUi(
 private fun BottomBarUi(
     items: List<BottomBarItem>,
     modifier: Modifier = Modifier,
+    onSelect: (BottomBarItem) -> Unit,
 ) {
-    var selectedItem by remember {
+    var selectedItem: BottomBarItem by remember {
         mutableStateOf(BottomBarItem.Notes)
     }
 
@@ -118,23 +121,14 @@ private fun BottomBarUi(
     ) {
         items.forEach { item ->
             BottomBarButtonUi(
+                modifier = Modifier.clickable {
+                    selectedItem = item
+                    onSelect(item)
+                },
                 item = item,
                 isSelected = false,
-            ) {
-            }
+            )
         }
-//        BottomBarButtonUi(
-//            title = "Notes",
-//            icon = Icons.Default.Notifications,
-//            isSelected = false,
-//        ) {
-//        }
-//        BottomBarButtonUi(
-//            title = "Todo",
-//            icon = Icons.AutoMirrored.Filled.List,
-//            isSelected = false,
-//        ) {
-//        }
     }
 }
 
@@ -143,12 +137,9 @@ private fun BottomBarButtonUi(
     item: BottomBarItem,
     isSelected: Boolean,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit,
 ) {
     Column(
-        modifier = modifier
-            .clickable { onClick() }
-            .padding(12.dp),
+        modifier = modifier.padding(12.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Icon(
