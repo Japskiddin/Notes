@@ -41,7 +41,7 @@ fun main() {
                 windowInfo = LocalWindowInfo.current
             )
 
-            Application(rootComponent = rootComponent)
+            Application(component = rootComponent)
         }
     }
 }

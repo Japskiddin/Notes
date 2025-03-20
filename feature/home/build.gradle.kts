@@ -25,11 +25,17 @@ kotlin {
             implementation(libs.decompose)
             implementation(libs.decompose.extensions.compose)
             implementation(libs.koin.compose)
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.material3)
+            implementation(compose.ui)
+            implementation(compose.components.uiToolingPreview)
             implementation(compose.components.resources)
         }
 
         androidMain.dependencies {
             implementation(libs.androidx.core.ktx)
+            implementation(compose.preview)
         }
     }
 }

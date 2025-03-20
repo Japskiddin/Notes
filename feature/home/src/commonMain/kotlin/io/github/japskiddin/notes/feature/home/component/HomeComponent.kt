@@ -1,11 +1,11 @@
 package io.github.japskiddin.notes.feature.home.component
 
 import com.arkivanov.decompose.ComponentContext
+import com.arkivanov.decompose.value.Value
 import io.github.japskiddin.notes.core.model.Note
-import kotlinx.coroutines.flow.StateFlow
 
 public interface HomeComponent {
-    public val notes: StateFlow<List<Note>>
+    public val notes: Value<List<Note>>
 
     public fun interface Factory {
         public operator fun invoke(

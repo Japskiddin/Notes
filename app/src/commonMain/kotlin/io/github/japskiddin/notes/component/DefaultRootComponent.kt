@@ -5,7 +5,6 @@ import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.value.Value
-import io.github.japskiddin.notes.component.DefaultRootComponent.ChildConfig.Home
 import io.github.japskiddin.notes.feature.home.component.HomeComponent
 import kotlinx.serialization.Serializable
 
@@ -13,29 +12,29 @@ class DefaultRootComponent(
     componentContext: ComponentContext,
     private val homeComponentFactory: HomeComponent.Factory,
 ) : RootComponent, ComponentContext by componentContext {
-    private val navigation = StackNavigation<ChildConfig>()
+    private val navigation = StackNavigation<Config>()
 
     override val childStack: Value<ChildStack<*, RootComponent.Child>> = childStack(
         source = navigation,
-        initialConfiguration = Home,
-        serializer = ChildConfig.serializer(),
+        initialConfiguration = Config.Home,
+        serializer = Config.serializer(),
         handleBackButton = true,
         childFactory = ::createChild,
     )
 
     private fun createChild(
-        config: ChildConfig,
+        config: Config,
         componentContext: ComponentContext,
     ): RootComponent.Child = when (config) {
-        is Home -> RootComponent.Child.Home(
+        is Config.Home -> RootComponent.Child.Home(
             homeComponentFactory(componentContext)
         )
     }
 
     @Serializable
-    private sealed interface ChildConfig {
+    private sealed interface Config {
         @Serializable
-        data object Home : ChildConfig
+        data object Home : Config
     }
 
     class Factory(

@@ -1,17 +1,17 @@
 package io.github.japskiddin.notes.feature.home.component
 
 import com.arkivanov.decompose.ComponentContext
+import com.arkivanov.decompose.value.MutableValue
+import com.arkivanov.decompose.value.Value
 import io.github.japskiddin.notes.core.domain.NoteRepository
 import io.github.japskiddin.notes.core.model.Note
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 
 internal class DefaultHomeComponent(
     componentContext: ComponentContext,
     private val noteRepository: NoteRepository,
 ) : HomeComponent, ComponentContext by componentContext {
-    override val notes: StateFlow<List<Note>>
-        get() = MutableStateFlow(emptyList())
+    override val notes: Value<List<Note>>
+        get() = MutableValue(emptyList())
 
     class Factory(
         private val noteRepository: NoteRepository
