@@ -39,6 +39,7 @@ kotlin {
             implementation(projects.core.domain)
             implementation(projects.core.database)
             implementation(projects.core.data)
+            implementation(projects.core.uikit)
             implementation(projects.feature.home)
         }
 
@@ -158,7 +159,6 @@ android {
 
     bundle {
         language {
-            @Suppress("UnstableApiUsage")
             enableSplit = false
         }
     }

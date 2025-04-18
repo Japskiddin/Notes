@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Заметки</string>
+    <string name="menu_todo">Дела</string>
+    <string name="menu_notes">Заметки</string>
+</resources>

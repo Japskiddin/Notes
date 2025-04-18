@@ -10,6 +10,9 @@ import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import io.github.japskiddin.notes.component.RootComponent
 import io.github.japskiddin.notes.di.appModules
 import io.github.japskiddin.notes.utils.runOnUiThread
+import io.github.japskiddin.resources.Res
+import io.github.japskiddin.resources.app_name
+import org.jetbrains.compose.resources.stringResource
 import org.koin.core.context.startKoin
 import org.koin.java.KoinJavaComponent.inject
 
@@ -33,7 +36,7 @@ fun main() {
         Window(
             onCloseRequest = ::exitApplication,
             state = windowState,
-            title = "Notes",
+            title = stringResource(Res.string.app_name),
         ) {
             LifecycleController(
                 lifecycleRegistry = lifecycle,
