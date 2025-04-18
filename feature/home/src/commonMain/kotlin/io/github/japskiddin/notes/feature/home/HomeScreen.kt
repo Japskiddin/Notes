@@ -14,6 +14,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Create
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -21,16 +23,22 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.stack.Children
+import com.arkivanov.decompose.extensions.compose.stack.animation.fade
+import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation
+import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import io.github.japskiddin.notes.feature.home.component.HomeComponent
+import io.github.japskiddin.notes.feature.home.component.NotesComponent
+import io.github.japskiddin.notes.feature.home.component.TodoComponent
 import io.github.japskiddin.notes.feature.home.component.ToolbarComponent
-import io.github.japskiddin.notes.feature.home.model.BottomBarItem
+import io.github.japskiddin.resources.Res
+import io.github.japskiddin.resources.menu_notes
+import io.github.japskiddin.resources.menu_todo
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 public fun HomeScreen(
@@ -40,23 +48,16 @@ public fun HomeScreen(
     Scaffold(
         modifier = modifier.fillMaxSize(),
         topBar = { ToolbarUi(component = component.toolbarComponent) },
-        bottomBar = {
-            BottomBarUi(
-                items = listOf(
-                    BottomBarItem.Notes,
-                    BottomBarItem.Todo,
-                ),
-                onSelect = { item ->
-                }
-            )
-        }
+        bottomBar = { BottomBarUi(component = component) }
     ) { paddingValues ->
         Children(
-            stack = component.childStack
-        ) { child ->
-            when (child.instance) {
-                is HomeComponent.HomeChild.Notes -> NotesUi()
-                is HomeComponent.HomeChild.Todo -> TodoUi()
+            stack = component.stack,
+            modifier = Modifier.padding(paddingValues),
+            animation = stackAnimation(fade()),
+        ) {
+            when (val child = it.instance) {
+                is HomeComponent.HomeChild.Notes -> NotesUi(component = child.component)
+                is HomeComponent.HomeChild.Todo -> TodoUi(component = child.component)
             }
         }
     }
@@ -64,14 +65,16 @@ public fun HomeScreen(
 
 @Composable
 private fun NotesUi(
-    modifier: Modifier = Modifier
+    component: NotesComponent,
+    modifier: Modifier = Modifier,
 ) {
     Text(text = "Notes")
 }
 
 @Composable
 private fun TodoUi(
-    modifier: Modifier = Modifier
+    component: TodoComponent,
+    modifier: Modifier = Modifier,
 ) {
     Text(text = "Todo")
 }
@@ -104,13 +107,11 @@ private fun ToolbarUi(
 
 @Composable
 private fun BottomBarUi(
-    items: List<BottomBarItem>,
+    component: HomeComponent,
     modifier: Modifier = Modifier,
-    onSelect: (BottomBarItem) -> Unit,
 ) {
-    var selectedItem: BottomBarItem by remember {
-        mutableStateOf(BottomBarItem.Notes)
-    }
+    val stack by component.stack.subscribeAsState()
+    val activeComponent = stack.active.instance
 
     Row(
         modifier = modifier
@@ -119,23 +120,30 @@ private fun BottomBarUi(
             .displayCutoutPadding(),
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
-        items.forEach { item ->
-            BottomBarButtonUi(
-                modifier = Modifier.clickable {
-                    selectedItem = item
-                    onSelect(item)
-                },
-                item = item,
-                isSelected = false,
-            )
-        }
+        BottomBarButton(
+            modifier = Modifier.clickable {
+                component.onNotesClick()
+            },
+            icon = Icons.Default.Create,
+            title = stringResource(Res.string.menu_notes),
+            isSelected = activeComponent is HomeComponent.HomeChild.Notes,
+        )
+        BottomBarButton(
+            modifier = Modifier.clickable {
+                component.onTodoClick()
+            },
+            icon = Icons.Default.Home,
+            title = stringResource(Res.string.menu_todo),
+            isSelected = activeComponent is HomeComponent.HomeChild.Todo,
+        )
     }
 }
 
 @Composable
-private fun BottomBarButtonUi(
-    item: BottomBarItem,
+private fun BottomBarButton(
     isSelected: Boolean,
+    icon: ImageVector,
+    title: String,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -143,12 +151,12 @@ private fun BottomBarButtonUi(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Icon(
-            imageVector = item.icon,
-            contentDescription = item.title,
+            imageVector = icon,
+            contentDescription = title,
         )
         Spacer(modifier = Modifier.height(6.dp))
         Text(
-            text = item.title
+            text = title
         )
     }
 }

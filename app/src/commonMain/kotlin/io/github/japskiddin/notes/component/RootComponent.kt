@@ -6,7 +6,7 @@ import com.arkivanov.decompose.value.Value
 import io.github.japskiddin.notes.feature.home.component.HomeComponent
 
 interface RootComponent {
-    val childStack: Value<ChildStack<*, Child>>
+    val stack: Value<ChildStack<*, Child>>
 
     sealed interface Child {
         class Home(val component: HomeComponent) : Child

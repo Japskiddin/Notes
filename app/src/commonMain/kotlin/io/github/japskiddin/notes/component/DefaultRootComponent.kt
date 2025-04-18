@@ -14,15 +14,17 @@ class DefaultRootComponent(
 ) : RootComponent, ComponentContext by componentContext {
     private val navigation = StackNavigation<Config>()
 
-    override val childStack: Value<ChildStack<*, RootComponent.Child>> = childStack(
+    private val _stack: Value<ChildStack<*, RootComponent.Child>> = childStack(
         source = navigation,
         initialConfiguration = Config.Home,
         serializer = Config.serializer(),
         handleBackButton = true,
-        childFactory = ::createChild,
+        childFactory = ::child,
     )
 
-    private fun createChild(
+    override val stack: Value<ChildStack<*, RootComponent.Child>> = _stack
+
+    private fun child(
         config: Config,
         componentContext: ComponentContext,
     ): RootComponent.Child = when (config) {

@@ -1,5 +1,7 @@
 package io.github.japskiddin.notes
 
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
@@ -44,7 +46,10 @@ fun main() {
                 windowInfo = LocalWindowInfo.current
             )
 
-            Application(component = rootComponent)
+            Application(
+                component = rootComponent,
+                modifier = Modifier.fillMaxSize()
+            )
         }
     }
 }

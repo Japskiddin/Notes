@@ -7,7 +7,6 @@ import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.bringToFront
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.value.Value
-import io.github.japskiddin.notes.feature.home.model.BottomBarItem
 import kotlinx.serialization.Serializable
 
 internal class DefaultHomeComponent(
@@ -15,15 +14,16 @@ internal class DefaultHomeComponent(
 ) : HomeComponent, ComponentContext by componentContext {
     private val navigation = StackNavigation<Config>()
 
-    override val childStack: Value<ChildStack<*, HomeComponent.HomeChild>> =
-        childStack(
-            source = navigation,
-            serializer = Config.serializer(),
-            initialStack = { listOf(Config.Notes, Config.Todo) },
-            childFactory = ::createChild
-        )
+    private val _stack: Value<ChildStack<*, HomeComponent.HomeChild>> = childStack(
+        source = navigation,
+        serializer = Config.serializer(),
+        initialStack = { listOf(Config.Todo, Config.Notes) },
+        childFactory = ::child
+    )
 
-    private fun createChild(
+    override val stack: Value<ChildStack<*, HomeComponent.HomeChild>> = _stack
+
+    private fun child(
         config: Config,
         componentContext: ComponentContext,
     ): HomeComponent.HomeChild =
@@ -41,16 +41,13 @@ internal class DefaultHomeComponent(
         childContext(key = "toolbar")
     )
 
-    override val bottomBarComponent: BottomBarComponent = DefaultBottomBarComponent(
-        childContext(key = "bottomBar")
-    )
+    override fun onNotesClick() {
+        navigation.bringToFront(Config.Notes)
+    }
 
-    override fun onSelectTab(tab: BottomBarItem) =
-        when (tab) {
-            is BottomBarItem.Notes -> navigation.bringToFront(Config.Notes)
-
-            is BottomBarItem.Todo -> navigation.bringToFront(Config.Todo)
-        }
+    override fun onTodoClick() {
+        navigation.bringToFront(Config.Todo)
+    }
 
     @Serializable
     internal sealed interface Config {

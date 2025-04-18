@@ -4,13 +4,30 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.arkivanov.decompose.router.stack.ChildStack
+import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
-import io.github.japskiddin.notes.feature.home.component.BottomBarComponent
 import io.github.japskiddin.notes.feature.home.component.HomeComponent
+import io.github.japskiddin.notes.feature.home.component.TodoComponent
 import io.github.japskiddin.notes.feature.home.component.ToolbarComponent
-import io.github.japskiddin.notes.feature.home.model.BottomBarItem
 
-private class FakeBottomBarComponent : BottomBarComponent {
+private class PreviewToolbarComponent : ToolbarComponent {
+    override fun onSettingsClick() {
+    }
+}
+
+private class PreviewTodoComponent : TodoComponent
+
+private class PreviewHomeComponent : HomeComponent {
+    override val toolbarComponent: ToolbarComponent = PreviewToolbarComponent()
+
+    override val stack: Value<ChildStack<*, HomeComponent.HomeChild>> =
+        MutableValue(
+            ChildStack(
+                configuration = Unit,
+                instance = HomeComponent.HomeChild.Todo(PreviewTodoComponent())
+            )
+        )
+
     override fun onNotesClick() {
     }
 
@@ -18,27 +35,10 @@ private class FakeBottomBarComponent : BottomBarComponent {
     }
 }
 
-private class FakeToolbarComponent : ToolbarComponent {
-    override fun onSettingsClick() {
-    }
-}
-
-private class FakeHomeComponent : HomeComponent {
-    override val toolbarComponent: ToolbarComponent = FakeToolbarComponent()
-
-    override val bottomBarComponent: BottomBarComponent = FakeBottomBarComponent()
-
-    override val childStack: Value<ChildStack<*, HomeComponent.HomeChild>>
-        get() = TODO("Not yet implemented")
-
-    override fun onSelectTab(tab: BottomBarItem) {
-    }
-}
-
 @Preview
 @Composable
 private fun HomeScreenPreview() {
     MaterialTheme {
-        HomeScreen(component = FakeHomeComponent())
+        HomeScreen(component = PreviewHomeComponent())
     }
 }
