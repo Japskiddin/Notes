@@ -1,11 +1,11 @@
 package io.github.japskiddin.notes.feature.home
 
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
+import io.github.japskiddin.notes.core.uikit.theme.NotesTheme
 import io.github.japskiddin.notes.feature.home.component.HomeComponent
 import io.github.japskiddin.notes.feature.home.component.TodoComponent
 import io.github.japskiddin.notes.feature.home.component.ToolbarComponent
@@ -38,7 +38,7 @@ private class PreviewHomeComponent : HomeComponent {
 @Preview
 @Composable
 private fun HomeScreenPreview() {
-    MaterialTheme {
+    NotesTheme {
         HomeScreen(component = PreviewHomeComponent())
     }
 }
