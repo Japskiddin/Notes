@@ -20,6 +20,8 @@ kotlin {
         commonMain.dependencies {
             implementation(project.dependencies.platform(libs.koin.bom))
             implementation(project.dependencies.platform(libs.androidx.compose.bom))
+            implementation(projects.core.common)
+            implementation(projects.core.utils)
             implementation(projects.core.uikit)
             implementation(projects.core.domain)
             implementation(projects.core.data)

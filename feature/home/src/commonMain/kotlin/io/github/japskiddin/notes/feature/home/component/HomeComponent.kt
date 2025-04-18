@@ -7,16 +7,16 @@ import com.arkivanov.decompose.value.Value
 public interface HomeComponent {
     public val toolbarComponent: ToolbarComponent
 
-    public val stack: Value<ChildStack<*, HomeChild>>
+    public val stack: Value<ChildStack<*, Child>>
 
     public fun onTodoClick()
 
     public fun onNotesClick()
 
-    public sealed interface HomeChild {
-        public class Notes(public val component: NotesComponent) : HomeChild
+    public sealed interface Child {
+        public class Notes(public val component: NotesComponent) : Child
 
-        public class Todo(public val component: TodoComponent) : HomeChild
+        public class Todo(public val component: TodoComponent) : Child
     }
 
     public fun interface Factory {

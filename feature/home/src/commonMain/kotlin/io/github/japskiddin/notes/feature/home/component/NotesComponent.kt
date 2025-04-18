@@ -1,3 +1,8 @@
 package io.github.japskiddin.notes.feature.home.component
 
-public interface NotesComponent
+import io.github.japskiddin.notes.core.model.Note
+import kotlinx.coroutines.flow.StateFlow
+
+public interface NotesComponent {
+    public val list: StateFlow<List<Note>>
+}

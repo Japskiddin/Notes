@@ -20,11 +20,11 @@ private class PreviewTodoComponent : TodoComponent
 private class PreviewHomeComponent : HomeComponent {
     override val toolbarComponent: ToolbarComponent = PreviewToolbarComponent()
 
-    override val stack: Value<ChildStack<*, HomeComponent.HomeChild>> =
+    override val stack: Value<ChildStack<*, HomeComponent.Child>> =
         MutableValue(
             ChildStack(
                 configuration = Unit,
-                instance = HomeComponent.HomeChild.Todo(PreviewTodoComponent())
+                instance = HomeComponent.Child.Todo(PreviewTodoComponent())
             )
         )
 

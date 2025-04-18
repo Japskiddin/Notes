@@ -14,25 +14,25 @@ internal class DefaultHomeComponent(
 ) : HomeComponent, ComponentContext by componentContext {
     private val navigation = StackNavigation<Config>()
 
-    private val _stack: Value<ChildStack<*, HomeComponent.HomeChild>> = childStack(
+    private val _stack: Value<ChildStack<*, HomeComponent.Child>> = childStack(
         source = navigation,
         serializer = Config.serializer(),
         initialStack = { listOf(Config.Todo, Config.Notes) },
         childFactory = ::child
     )
 
-    override val stack: Value<ChildStack<*, HomeComponent.HomeChild>> = _stack
+    override val stack: Value<ChildStack<*, HomeComponent.Child>> = _stack
 
     private fun child(
         config: Config,
         componentContext: ComponentContext,
-    ): HomeComponent.HomeChild =
+    ): HomeComponent.Child =
         when (config) {
-            is Config.Notes -> HomeComponent.HomeChild.Notes(
+            is Config.Notes -> HomeComponent.Child.Notes(
                 DefaultNotesComponent(componentContext)
             )
 
-            is Config.Todo -> HomeComponent.HomeChild.Todo(
+            is Config.Todo -> HomeComponent.Child.Todo(
                 DefaultTodoComponent(componentContext)
             )
         }

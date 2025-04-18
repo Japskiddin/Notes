@@ -22,6 +22,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -56,8 +57,8 @@ public fun HomeScreen(
             animation = stackAnimation(fade()),
         ) {
             when (val child = it.instance) {
-                is HomeComponent.HomeChild.Notes -> NotesUi(component = child.component)
-                is HomeComponent.HomeChild.Todo -> TodoUi(component = child.component)
+                is HomeComponent.Child.Notes -> NotesUi(component = child.component)
+                is HomeComponent.Child.Todo -> TodoUi(component = child.component)
             }
         }
     }
@@ -68,7 +69,13 @@ private fun NotesUi(
     component: NotesComponent,
     modifier: Modifier = Modifier,
 ) {
-    Text(text = "Notes")
+    val list by component.list.collectAsState()
+
+    if (list.isNotEmpty()) {
+        Text(text = "Notes")
+    } else {
+        Text(text = "Empty")
+    }
 }
 
 @Composable
@@ -76,6 +83,8 @@ private fun TodoUi(
     component: TodoComponent,
     modifier: Modifier = Modifier,
 ) {
+    val list by component.list.collectAsState()
+
     Text(text = "Todo")
 }
 
@@ -126,7 +135,7 @@ private fun BottomBarUi(
             },
             icon = Icons.Default.Create,
             title = stringResource(Res.string.menu_notes),
-            isSelected = activeComponent is HomeComponent.HomeChild.Notes,
+            isSelected = activeComponent is HomeComponent.Child.Notes,
         )
         BottomBarButton(
             modifier = Modifier.clickable {
@@ -134,7 +143,7 @@ private fun BottomBarUi(
             },
             icon = Icons.Default.Home,
             title = stringResource(Res.string.menu_todo),
-            isSelected = activeComponent is HomeComponent.HomeChild.Todo,
+            isSelected = activeComponent is HomeComponent.Child.Todo,
         )
     }
 }

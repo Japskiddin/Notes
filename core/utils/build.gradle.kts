@@ -12,6 +12,13 @@ kotlin {
 
     androidTarget()
     jvm()
+
+    sourceSets {
+        commonMain.dependencies {
+            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.decompose)
+        }
+    }
 }
 
 android {
