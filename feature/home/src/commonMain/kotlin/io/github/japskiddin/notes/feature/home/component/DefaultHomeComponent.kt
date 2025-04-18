@@ -21,6 +21,9 @@ internal class DefaultHomeComponent(
         childFactory = ::child
     )
 
+    private val activeChild: HomeComponent.Child
+        get() = _stack.value.active.instance
+
     override val stack: Value<ChildStack<*, HomeComponent.Child>> = _stack
 
     private fun child(
