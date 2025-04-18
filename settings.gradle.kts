@@ -35,7 +35,6 @@ include(
     ":core:model",
     ":core:domain",
     ":core:data",
-    ":core:ui",
     ":core:uikit",
     ":core:utils",
     ":feature:home",
