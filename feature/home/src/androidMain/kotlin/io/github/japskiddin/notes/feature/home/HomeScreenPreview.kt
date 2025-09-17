@@ -5,17 +5,26 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
+import io.github.japskiddin.notes.core.model.Todo
 import io.github.japskiddin.notes.core.uikit.theme.NotesTheme
 import io.github.japskiddin.notes.feature.home.component.HomeComponent
 import io.github.japskiddin.notes.feature.home.component.TodoComponent
 import io.github.japskiddin.notes.feature.home.component.ToolbarComponent
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 private class PreviewToolbarComponent : ToolbarComponent {
+    override val title: Value<String>
+        get() = MutableValue("Toolbar")
+
     override fun onSettingsClick() {
     }
 }
 
-private class PreviewTodoComponent : TodoComponent
+private class PreviewTodoComponent : TodoComponent {
+    override val list: StateFlow<List<Todo>>
+        get() = MutableStateFlow(emptyList())
+}
 
 private class PreviewHomeComponent : HomeComponent {
     override val toolbarComponent: ToolbarComponent = PreviewToolbarComponent()

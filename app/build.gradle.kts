@@ -69,7 +69,7 @@ android {
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = libs.versions.app.versionCode.get().toInt()
         versionName = libs.versions.app.versionName.get()
-        setProperty("archivesBaseName", "notes-$versionName-$versionCode")
+        base.archivesName = "notes-$versionName-$versionCode"
         ndk {
             //noinspection ChromeOsAbiSupport
             abiFilters += listOf("arm64-v8a", "armeabi-v7a", "x86", "x86_64")

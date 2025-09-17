@@ -1,3 +1,6 @@
+import com.deezer.caupain.model.StabilityLevelPolicy
+import com.deezer.caupain.plugin.DependenciesUpdateTask
+
 plugins {
     // this is necessary to avoid the plugins to be loaded multiple times
     // in each subproject's classloader
@@ -11,8 +14,13 @@ plugins {
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.androidx.room) apply false
     alias(libs.plugins.detekt) apply false
+    alias(libs.plugins.caupain)
 }
 
 tasks.register("clean", Delete::class) {
     delete(layout.buildDirectory)
+}
+
+tasks.withType<DependenciesUpdateTask> {
+    selectIf(StabilityLevelPolicy)
 }
