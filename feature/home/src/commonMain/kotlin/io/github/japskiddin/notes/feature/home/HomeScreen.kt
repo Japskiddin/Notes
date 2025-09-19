@@ -22,6 +22,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.stack.Children
@@ -61,7 +62,9 @@ public fun HomeScreen(
                 }
             )
         },
-        bottomBar = { BottomBarUi(component = component) }
+        bottomBar = {
+            BottomBarUi(component = component)
+        }
     ) { paddingValues ->
         Children(
             stack = component.stack,
@@ -128,7 +131,7 @@ private fun BottomBarUi(
     modifier: Modifier = Modifier,
 ) {
     val stack by component.stack.subscribeAsState()
-    val activeComponent = stack.active.instance
+    val activeChild = stack.active.instance
 
     Row(
         modifier = modifier
@@ -143,7 +146,7 @@ private fun BottomBarUi(
             },
             icon = vectorResource(Res.drawable.ic_notes),
             title = stringResource(Res.string.menu_notes),
-            isSelected = activeComponent is HomeComponent.Child.Notes,
+            isSelected = activeChild is HomeComponent.Child.Notes,
         )
         BottomBarButton(
             modifier = Modifier.clickable {
@@ -151,7 +154,7 @@ private fun BottomBarUi(
             },
             icon = vectorResource(Res.drawable.ic_todo_list),
             title = stringResource(Res.string.menu_todo),
-            isSelected = activeComponent is HomeComponent.Child.Todo,
+            isSelected = activeChild is HomeComponent.Child.Todo,
         )
     }
 }
@@ -173,7 +176,12 @@ private fun BottomBarButton(
         )
         Spacer(modifier = Modifier.height(6.dp))
         Text(
-            text = title
+            text = title,
+            color = if (isSelected) {
+                Color.Red
+            } else {
+                Color.White
+            }
         )
     }
 }
