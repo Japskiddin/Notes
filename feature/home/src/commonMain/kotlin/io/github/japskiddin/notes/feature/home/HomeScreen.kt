@@ -47,9 +47,20 @@ public fun HomeScreen(
     component: HomeComponent,
     modifier: Modifier = Modifier,
 ) {
+    val stack = component.stack.subscribeAsState()
+    val activeChild = stack.value.active.instance
+
     Scaffold(
         modifier = modifier.fillMaxSize(),
-        topBar = { ToolbarUi(component = component.toolbarComponent) },
+        topBar = {
+            ToolbarUi(
+                component = component.toolbarComponent,
+                title = when (activeChild) {
+                    is HomeComponent.Child.Notes -> stringResource(Res.string.menu_notes)
+                    is HomeComponent.Child.Todo -> stringResource(Res.string.menu_todo)
+                }
+            )
+        },
         bottomBar = { BottomBarUi(component = component) }
     ) { paddingValues ->
         Children(
@@ -71,12 +82,6 @@ private fun NotesUi(
     modifier: Modifier = Modifier,
 ) {
     val list by component.list.collectAsState()
-
-    if (list.isNotEmpty()) {
-        Text(text = "Notes")
-    } else {
-        Text(text = "Empty")
-    }
 }
 
 @Composable
@@ -85,13 +90,12 @@ private fun TodoUi(
     modifier: Modifier = Modifier,
 ) {
     val list by component.list.collectAsState()
-
-    Text(text = "Todo")
 }
 
 @Composable
 private fun ToolbarUi(
     component: ToolbarComponent,
+    title: String,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -103,6 +107,9 @@ private fun ToolbarUi(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.End,
     ) {
+        Text(
+            text = title
+        )
         IconButton(
             onClick = { component.onSettingsClick() },
         ) {

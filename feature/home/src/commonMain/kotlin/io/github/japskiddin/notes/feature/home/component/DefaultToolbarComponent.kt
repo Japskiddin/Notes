@@ -13,7 +13,7 @@ internal class DefaultToolbarComponent(
     override val title: Value<String>
         get() = _title
 
-    fun setTitle(title: String) {
+    override fun setTitle(title: String) {
         _title.update { title }
     }
 
