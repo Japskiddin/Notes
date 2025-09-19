@@ -13,10 +13,6 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Create
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -37,9 +33,14 @@ import io.github.japskiddin.notes.feature.home.component.NotesComponent
 import io.github.japskiddin.notes.feature.home.component.TodoComponent
 import io.github.japskiddin.notes.feature.home.component.ToolbarComponent
 import io.github.japskiddin.resources.Res
+import io.github.japskiddin.resources.ic_notes
+import io.github.japskiddin.resources.ic_settings
+import io.github.japskiddin.resources.ic_todo_list
 import io.github.japskiddin.resources.menu_notes
 import io.github.japskiddin.resources.menu_todo
+import io.github.japskiddin.resources.settings
 import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.resources.vectorResource
 
 @Composable
 public fun HomeScreen(
@@ -106,8 +107,8 @@ private fun ToolbarUi(
             onClick = { component.onSettingsClick() },
         ) {
             Icon(
-                imageVector = Icons.Default.Settings,
-                contentDescription = "Settings",
+                imageVector = vectorResource(Res.drawable.ic_settings),
+                contentDescription = stringResource(Res.string.settings),
                 modifier = Modifier.size(24.dp),
             )
         }
@@ -133,7 +134,7 @@ private fun BottomBarUi(
             modifier = Modifier.clickable {
                 component.onNotesClick()
             },
-            icon = Icons.Default.Create,
+            icon = vectorResource(Res.drawable.ic_notes),
             title = stringResource(Res.string.menu_notes),
             isSelected = activeComponent is HomeComponent.Child.Notes,
         )
@@ -141,7 +142,7 @@ private fun BottomBarUi(
             modifier = Modifier.clickable {
                 component.onTodoClick()
             },
-            icon = Icons.Default.Home,
+            icon = vectorResource(Res.drawable.ic_todo_list),
             title = stringResource(Res.string.menu_todo),
             isSelected = activeComponent is HomeComponent.Child.Todo,
         )
