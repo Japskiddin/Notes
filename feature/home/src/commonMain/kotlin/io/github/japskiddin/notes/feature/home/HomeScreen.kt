@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package io.github.japskiddin.notes.feature.home
 
 import androidx.compose.foundation.clickable
@@ -6,17 +8,18 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.displayCutoutPadding
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -52,7 +55,6 @@ public fun HomeScreen(
     val activeChild = stack.value.active.instance
 
     Scaffold(
-        modifier = modifier.fillMaxSize(),
         topBar = {
             ToolbarUi(
                 component = component.toolbarComponent,
@@ -101,28 +103,26 @@ private fun ToolbarUi(
     title: String,
     modifier: Modifier = Modifier,
 ) {
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .statusBarsPadding()
-            .displayCutoutPadding()
-            .padding(6.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.End,
-    ) {
-        Text(
-            text = title
-        )
-        IconButton(
-            onClick = { component.onSettingsClick() },
-        ) {
-            Icon(
-                imageVector = vectorResource(Res.drawable.ic_settings),
-                contentDescription = stringResource(Res.string.settings),
-                modifier = Modifier.size(24.dp),
-            )
+    TopAppBar(
+        title = {
+            Text(text = title)
+        },
+        modifier = modifier,
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = MaterialTheme.colorScheme.surface,
+            titleContentColor = MaterialTheme.colorScheme.onSurface,
+        ),
+        actions = {
+            IconButton(
+                onClick = { component.onSettingsClick() },
+            ) {
+                Icon(
+                    imageVector = vectorResource(Res.drawable.ic_settings),
+                    contentDescription = stringResource(Res.string.settings),
+                )
+            }
         }
-    }
+    )
 }
 
 @Composable
