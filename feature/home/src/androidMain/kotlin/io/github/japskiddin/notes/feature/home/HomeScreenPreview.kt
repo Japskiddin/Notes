@@ -9,11 +9,11 @@ import io.github.japskiddin.notes.core.model.Todo
 import io.github.japskiddin.notes.core.uikit.theme.NotesTheme
 import io.github.japskiddin.notes.feature.home.component.HomeComponent
 import io.github.japskiddin.notes.feature.home.component.TodoComponent
-import io.github.japskiddin.notes.feature.home.component.ToolbarComponent
+import io.github.japskiddin.notes.feature.home.component.TopBarComponent
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-private class PreviewToolbarComponent : ToolbarComponent {
+private class PreviewTopBarComponent : TopBarComponent {
     override val title: Value<String>
         get() = MutableValue("Toolbar")
 
@@ -27,7 +27,7 @@ private class PreviewTodoComponent : TodoComponent {
 }
 
 private class PreviewHomeComponent : HomeComponent {
-    override val toolbarComponent: ToolbarComponent = PreviewToolbarComponent()
+    override val topBarComponent: TopBarComponent = PreviewTopBarComponent()
 
     override val stack: Value<ChildStack<*, HomeComponent.Child>> =
         MutableValue(

@@ -40,8 +40,8 @@ internal class DefaultHomeComponent(
             )
         }
 
-    override val toolbarComponent: ToolbarComponent = DefaultToolbarComponent(
-        childContext(key = "toolbar")
+    override val topBarComponent: TopBarComponent = DefaultTopBarComponent(
+        childContext(key = "app_bar")
     )
 
     override fun onNotesClick() {

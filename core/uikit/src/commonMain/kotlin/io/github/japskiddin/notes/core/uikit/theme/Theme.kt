@@ -17,6 +17,7 @@ public fun NotesTheme(
     MaterialTheme(
         colorScheme = colorScheme,
         typography = NotesTypography(),
+        shapes = Shapes,
         content = content,
     )
 }

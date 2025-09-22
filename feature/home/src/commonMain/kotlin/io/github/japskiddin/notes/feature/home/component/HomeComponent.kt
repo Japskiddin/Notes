@@ -5,7 +5,7 @@ import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.Value
 
 public interface HomeComponent {
-    public val toolbarComponent: ToolbarComponent
+    public val topBarComponent: TopBarComponent
 
     public val stack: Value<ChildStack<*, Child>>
 

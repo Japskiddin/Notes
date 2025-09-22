@@ -19,12 +19,11 @@ fun Application(
 ) {
     NotesTheme {
         Surface(
-            modifier = Modifier.fillMaxSize(),
+            modifier = modifier,
             color = MaterialTheme.colorScheme.background,
         ) {
             Children(
                 stack = component.stack,
-                modifier = modifier,
                 animation = stackAnimation(fade())
             ) {
                 when (val child = it.instance) {

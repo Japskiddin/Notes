@@ -2,6 +2,7 @@
 
 package io.github.japskiddin.notes.feature.home
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -25,7 +27,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.stack.Children
@@ -35,7 +36,7 @@ import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import io.github.japskiddin.notes.feature.home.component.HomeComponent
 import io.github.japskiddin.notes.feature.home.component.NotesComponent
 import io.github.japskiddin.notes.feature.home.component.TodoComponent
-import io.github.japskiddin.notes.feature.home.component.ToolbarComponent
+import io.github.japskiddin.notes.feature.home.component.TopBarComponent
 import io.github.japskiddin.resources.Res
 import io.github.japskiddin.resources.ic_notes
 import io.github.japskiddin.resources.ic_settings
@@ -55,9 +56,10 @@ public fun HomeScreen(
     val activeChild = stack.value.active.instance
 
     Scaffold(
+        modifier = modifier,
         topBar = {
-            ToolbarUi(
-                component = component.toolbarComponent,
+            TopBarUi(
+                component = component.topBarComponent,
                 title = when (activeChild) {
                     is HomeComponent.Child.Notes -> stringResource(Res.string.menu_notes)
                     is HomeComponent.Child.Todo -> stringResource(Res.string.menu_todo)
@@ -98,8 +100,8 @@ private fun TodoUi(
 }
 
 @Composable
-private fun ToolbarUi(
-    component: ToolbarComponent,
+private fun TopBarUi(
+    component: TopBarComponent,
     title: String,
     modifier: Modifier = Modifier,
 ) {
@@ -111,6 +113,7 @@ private fun ToolbarUi(
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = MaterialTheme.colorScheme.surface,
             titleContentColor = MaterialTheme.colorScheme.onSurface,
+            actionIconContentColor = MaterialTheme.colorScheme.onSurface,
         ),
         actions = {
             IconButton(
@@ -161,11 +164,25 @@ private fun BottomBarUi(
 
 @Composable
 private fun BottomBarButton(
-    isSelected: Boolean,
     icon: ImageVector,
     title: String,
+    isSelected: Boolean,
     modifier: Modifier = Modifier,
 ) {
+    val iconModifier = Modifier
+        .size(height = 36.dp, width = 64.dp)
+        .then(
+            if (isSelected) {
+                Modifier.background(
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = .2f),
+                    shape = MaterialTheme.shapes.large
+                )
+            } else {
+                Modifier
+            }
+        )
+        .padding(6.dp)
+
     Column(
         modifier = modifier.padding(12.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -173,15 +190,13 @@ private fun BottomBarButton(
         Icon(
             imageVector = icon,
             contentDescription = title,
+            tint = MaterialTheme.colorScheme.onSurface,
+            modifier = iconModifier,
         )
         Spacer(modifier = Modifier.height(6.dp))
         Text(
             text = title,
-            color = if (isSelected) {
-                Color.Red
-            } else {
-                Color.White
-            }
+            color = MaterialTheme.colorScheme.onSurface,
         )
     }
 }
