@@ -27,6 +27,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.stack.Children
@@ -146,21 +147,19 @@ private fun BottomBarUi(
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
         BottomBarButton(
-            modifier = Modifier.clickable {
-                component.onNotesClick()
-            },
             icon = vectorResource(Res.drawable.ic_notes),
             title = stringResource(Res.string.menu_notes),
             isSelected = activeChild is HomeComponent.Child.Notes,
-        )
+        ) {
+            component.onNotesClick()
+        }
         BottomBarButton(
-            modifier = Modifier.clickable {
-                component.onTodoClick()
-            },
             icon = vectorResource(Res.drawable.ic_todo_list),
             title = stringResource(Res.string.menu_todo),
             isSelected = activeChild is HomeComponent.Child.Todo,
-        )
+        ) {
+            component.onTodoClick()
+        }
     }
 }
 
@@ -170,6 +169,7 @@ private fun BottomBarButton(
     title: String,
     isSelected: Boolean,
     modifier: Modifier = Modifier,
+    onClick: () -> Unit,
 ) {
     val iconModifier = Modifier
         .size(height = 36.dp, width = 64.dp)
@@ -186,7 +186,10 @@ private fun BottomBarButton(
         .padding(6.dp)
 
     Column(
-        modifier = modifier.padding(12.dp),
+        modifier = modifier
+            .clip(MaterialTheme.shapes.medium)
+            .clickable { onClick() }
+            .padding(12.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Icon(
