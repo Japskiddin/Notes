@@ -8,7 +8,7 @@ build-health = "3.0.3"
 
 androidx-annotation = "1.9.1"
 androidx-core-ktx = "1.17.0"
-androidx-lifecycle = "2.9.3"
+androidx-lifecycle = "2.9.4"
 androidx-activity = "1.11.0"
 androidx-compose-bom = "2025.09.00"
 androidx-datastore = "1.1.7"
@@ -40,7 +40,7 @@ detekt-rules-compose = "0.4.27"
 
 decompose = "3.3.0"
 
-caupain = "1.6.0"
+caupain = "1.6.1"
 
 # Used directly in gradle plugins
 

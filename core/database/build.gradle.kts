@@ -14,7 +14,7 @@ room {
 kotlin {
     explicitApi = ExplicitApiMode.Strict
 
-    jvmToolchain(21)
+    jvmToolchain(libs.versions.jvm.get().toInt())
 
     androidTarget()
     jvm()
