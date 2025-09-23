@@ -44,12 +44,18 @@ internal class DefaultHomeComponent(
         childContext(key = "app_bar")
     )
 
-    override fun onNotesClick() {
-        navigation.bringToFront(Config.Notes)
-    }
+    override val bottomBarComponent: BottomBarComponent = DefaultBottomBarComponent(
+        componentContext = childContext(key = "bottom_bar"),
+        onOpenTodo = {
+            openPage(Config.Todo)
+        },
+        onOpenNotes = {
+            openPage(Config.Notes)
+        },
+    )
 
-    override fun onTodoClick() {
-        navigation.bringToFront(Config.Todo)
+    private fun openPage(page: Config) {
+        navigation.bringToFront(page)
     }
 
     @Serializable

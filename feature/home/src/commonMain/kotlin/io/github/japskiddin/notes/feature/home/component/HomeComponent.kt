@@ -6,12 +6,9 @@ import com.arkivanov.decompose.value.Value
 
 public interface HomeComponent {
     public val topBarComponent: TopBarComponent
+    public val bottomBarComponent: BottomBarComponent
 
     public val stack: Value<ChildStack<*, Child>>
-
-    public fun onTodoClick()
-
-    public fun onNotesClick()
 
     public sealed interface Child {
         public class Notes(public val component: NotesComponent) : Child

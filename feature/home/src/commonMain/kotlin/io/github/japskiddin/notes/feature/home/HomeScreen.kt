@@ -33,6 +33,7 @@ import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.stack.animation.fade
 import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
+import io.github.japskiddin.notes.feature.home.component.BottomBarComponent
 import io.github.japskiddin.notes.feature.home.component.HomeComponent
 import io.github.japskiddin.notes.feature.home.component.NotesComponent
 import io.github.japskiddin.notes.feature.home.component.TodoComponent
@@ -67,7 +68,10 @@ public fun HomeScreen(
             )
         },
         bottomBar = {
-            BottomBarUi(component = component)
+            BottomBarUi(
+                component = component.bottomBarComponent,
+                activeChild = activeChild,
+            )
         }
     ) { paddingValues ->
         Children(
@@ -130,12 +134,10 @@ private fun TopBarUi(
 
 @Composable
 private fun BottomBarUi(
-    component: HomeComponent,
+    component: BottomBarComponent,
+    activeChild: HomeComponent.Child,
     modifier: Modifier = Modifier,
 ) {
-    val stack by component.stack.subscribeAsState()
-    val activeChild = stack.active.instance
-
     Row(
         modifier = modifier
             .fillMaxWidth()
