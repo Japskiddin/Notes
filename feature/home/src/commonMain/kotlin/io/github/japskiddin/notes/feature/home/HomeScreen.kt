@@ -5,6 +5,7 @@ package io.github.japskiddin.notes.feature.home
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -15,6 +16,7 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -40,6 +42,8 @@ import io.github.japskiddin.notes.feature.home.component.NotesComponent
 import io.github.japskiddin.notes.feature.home.component.TodoComponent
 import io.github.japskiddin.notes.feature.home.component.TopBarComponent
 import io.github.japskiddin.resources.Res
+import io.github.japskiddin.resources.add
+import io.github.japskiddin.resources.ic_add
 import io.github.japskiddin.resources.ic_notes
 import io.github.japskiddin.resources.ic_settings
 import io.github.japskiddin.resources.ic_todo_list
@@ -75,14 +79,29 @@ public fun HomeScreen(
             )
         }
     ) { paddingValues ->
-        Children(
-            stack = component.stack,
+        Box(
             modifier = Modifier.padding(paddingValues),
-            animation = stackAnimation(fade()),
         ) {
-            when (val child = it.instance) {
-                is HomeComponent.Child.Notes -> NotesUi(component = child.component)
-                is HomeComponent.Child.Todo -> TodoUi(component = child.component)
+            Children(
+                stack = component.stack,
+                animation = stackAnimation(fade()),
+            ) {
+                when (val child = it.instance) {
+                    is HomeComponent.Child.Notes -> NotesUi(component = child.component)
+                    is HomeComponent.Child.Todo -> TodoUi(component = child.component)
+                }
+            }
+            FloatingActionButton(
+                onClick = { },
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary,
+                modifier = Modifier.align(Alignment.Center)
+            ) {
+                Icon(
+                    modifier = Modifier.size(24.dp),
+                    imageVector = vectorResource(Res.drawable.ic_add),
+                    contentDescription = stringResource(Res.string.add),
+                )
             }
         }
     }
