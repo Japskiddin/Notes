@@ -171,20 +171,6 @@ private fun BottomBarButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
 ) {
-    val iconModifier = Modifier
-        .size(height = 36.dp, width = 64.dp)
-        .then(
-            if (isSelected) {
-                Modifier.background(
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = .2f),
-                    shape = MaterialTheme.shapes.large
-                )
-            } else {
-                Modifier
-            }
-        )
-        .padding(6.dp)
-
     Column(
         modifier = modifier
             .clip(MaterialTheme.shapes.medium)
@@ -196,11 +182,24 @@ private fun BottomBarButton(
             imageVector = icon,
             contentDescription = title,
             tint = MaterialTheme.colorScheme.onSurface,
-            modifier = iconModifier,
+            modifier = Modifier
+                .size(height = 36.dp, width = 64.dp)
+                .then(
+                    if (isSelected) {
+                        Modifier.background(
+                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = .2f),
+                            shape = MaterialTheme.shapes.large
+                        )
+                    } else {
+                        Modifier
+                    }
+                )
+                .padding(6.dp),
         )
         Spacer(modifier = Modifier.height(6.dp))
         Text(
             text = title,
+            style = MaterialTheme.typography.labelSmall,
             color = MaterialTheme.colorScheme.onSurface,
         )
     }

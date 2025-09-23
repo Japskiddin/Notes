@@ -14,6 +14,8 @@ import io.github.japskiddin.resources.Inter_BoldItalic
 import io.github.japskiddin.resources.Inter_Italic
 import io.github.japskiddin.resources.Inter_Light
 import io.github.japskiddin.resources.Inter_LightItalic
+import io.github.japskiddin.resources.Inter_Medium
+import io.github.japskiddin.resources.Inter_MediumItalic
 import io.github.japskiddin.resources.Inter_Regular
 import io.github.japskiddin.resources.Res
 import org.jetbrains.compose.resources.Font
@@ -21,10 +23,12 @@ import org.jetbrains.compose.resources.Font
 @Composable
 public fun NotesTypography(): Typography {
     val inter = FontFamily(
-        Font(Res.font.Inter_Light, FontWeight.Normal),
-        Font(Res.font.Inter_LightItalic, FontWeight.Normal, FontStyle.Italic),
+        Font(Res.font.Inter_Light, FontWeight.Light),
+        Font(Res.font.Inter_LightItalic, FontWeight.Light, FontStyle.Italic),
         Font(Res.font.Inter_Regular, FontWeight.Normal),
         Font(Res.font.Inter_Italic, FontWeight.Normal, FontStyle.Italic),
+        Font(Res.font.Inter_Medium, FontWeight.Medium),
+        Font(Res.font.Inter_MediumItalic, FontWeight.Medium, FontStyle.Italic),
         Font(Res.font.Inter_Bold, FontWeight.Bold),
         Font(Res.font.Inter_BoldItalic, FontWeight.Bold, FontStyle.Italic),
         Font(Res.font.Inter_Black, FontWeight.Black),
@@ -35,6 +39,11 @@ public fun NotesTypography(): Typography {
             fontFamily = inter,
             fontWeight = FontWeight.Bold,
             fontSize = 22.sp,
-        )
+        ),
+        labelSmall = TextStyle(
+            fontFamily = inter,
+            fontWeight = FontWeight.Medium,
+            fontSize = 14.sp,
+        ),
     )
 }
