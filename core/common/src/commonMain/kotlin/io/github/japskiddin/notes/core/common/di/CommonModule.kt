@@ -7,6 +7,7 @@ import org.koin.dsl.module
 public val commonModule: Module
     get() = module {
         loggerModule()
+        configurationModule()
 
         single { AppDispatchers() }
     }
