@@ -3,11 +3,11 @@ import java.io.FileInputStream
 import java.util.*
 
 plugins {
-    alias(libs.plugins.jetbrains.kotlin.multiplatform)
-    alias(libs.plugins.jetbrains.kotlin.serialization)
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.compose)
-    alias(libs.plugins.jetbrains.compose.compiler)
+    alias(libs.plugins.compose)
+    alias(libs.plugins.kotlin.plugin.compose)
 }
 
 kotlin {
