@@ -1,11 +1,12 @@
 import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.android.multiplatform.library)
-    alias(libs.plugins.compose)
-    alias(libs.plugins.kotlin.plugin.compose)
+    alias(libs.plugins.compose.multiplatform)
+    alias(libs.plugins.compose.compiler)
 }
 
 kotlin {
@@ -13,13 +14,29 @@ kotlin {
 
     jvmToolchain(libs.versions.jvm.get().toInt())
 
-    androidTarget()
+    androidLibrary {
+        namespace = "io.github.japskiddin.notes.feature.home"
+        compileSdk = libs.versions.android.compileSdk.get().toInt()
+        minSdk = libs.versions.android.minSdk.get().toInt()
+
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_21
+        }
+
+//        buildFeatures {
+//            compose = true
+//        }
+
+//        dependencies {
+//            debugImplementation(compose.uiTooling)
+//        }
+    }
+
     jvm()
 
     sourceSets {
         commonMain.dependencies {
             implementation(project.dependencies.platform(libs.koin.bom))
-            implementation(project.dependencies.platform(libs.androidx.compose.bom))
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
@@ -42,27 +59,4 @@ kotlin {
             implementation(compose.preview)
         }
     }
-}
-
-android {
-    namespace = "io.github.japskiddin.notes.feature.home"
-
-    compileSdk = libs.versions.android.compileSdk.get().toInt()
-
-    defaultConfig {
-        minSdk = libs.versions.android.minSdk.get().toInt()
-    }
-
-    buildFeatures {
-        compose = true
-    }
-
-    dependencies {
-        debugImplementation(compose.uiTooling)
-    }
-}
-
-dependencies {
-    debugImplementation(libs.androidx.compose.ui.tooling)
-    debugImplementation(libs.androidx.compose.ui.tooling.preview)
 }

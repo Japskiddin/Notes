@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -10,7 +11,16 @@ kotlin {
 
     jvmToolchain(libs.versions.jvm.get().toInt())
 
-    androidTarget()
+    androidLibrary {
+        namespace = "io.github.japskiddin.notes.core.common"
+        compileSdk = libs.versions.android.compileSdk.get().toInt()
+        minSdk = libs.versions.android.minSdk.get().toInt()
+
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_21
+        }
+    }
+
     jvm()
 
     sourceSets {
@@ -30,15 +40,5 @@ kotlin {
         jvmMain.dependencies {
             api(libs.kotlinx.coroutines.swing)
         }
-    }
-}
-
-android {
-    namespace = "io.github.japskiddin.notes.core.common"
-
-    compileSdk = libs.versions.android.compileSdk.get().toInt()
-
-    defaultConfig {
-        minSdk = libs.versions.android.minSdk.get().toInt()
     }
 }
