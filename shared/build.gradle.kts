@@ -55,7 +55,7 @@ kotlin {
         implementation(projects.core.domain)
         implementation(projects.core.database)
         implementation(projects.core.data)
-        implementation(projects.core.uikit)
+        api(projects.core.uikit)
 
         implementation(projects.feature.home)
     }
