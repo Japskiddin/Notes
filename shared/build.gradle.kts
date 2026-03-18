@@ -38,8 +38,8 @@ kotlin {
         implementation(libs.compose.components.resources)
         implementation(libs.compose.ui.tooling.preview)
 
-        implementation(libs.decompose)
-        implementation(libs.decompose.extensions.compose)
+        api(libs.decompose)
+        api(libs.decompose.extensions.compose)
 
         implementation(libs.androidx.lifecycle.viewmodel.compose)
         implementation(libs.androidx.lifecycle.runtime.compose)

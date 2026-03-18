@@ -7,6 +7,7 @@ import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
 import io.github.japskiddin.notes.core.model.Todo
 import io.github.japskiddin.notes.core.uikit.theme.NotesTheme
+import io.github.japskiddin.notes.feature.home.component.BottomBarComponent
 import io.github.japskiddin.notes.feature.home.component.HomeComponent
 import io.github.japskiddin.notes.feature.home.component.TodoComponent
 import io.github.japskiddin.notes.feature.home.component.TopBarComponent
@@ -14,10 +15,18 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 private class PreviewTopBarComponent : TopBarComponent {
-    override val title: Value<String>
-        get() = MutableValue("Toolbar")
-
     override fun onSettingsClick() {
+    }
+
+    override fun onSearchClick() {
+    }
+}
+
+private class PreviewBottomBarComponent : BottomBarComponent {
+    override fun onTodoClick() {
+    }
+
+    override fun onNotesClick() {
     }
 }
 
@@ -29,6 +38,8 @@ private class PreviewTodoComponent : TodoComponent {
 private class PreviewHomeComponent : HomeComponent {
     override val topBarComponent: TopBarComponent = PreviewTopBarComponent()
 
+    override val bottomBarComponent: BottomBarComponent = PreviewBottomBarComponent()
+
     override val stack: Value<ChildStack<*, HomeComponent.Child>> =
         MutableValue(
             ChildStack(
@@ -36,12 +47,6 @@ private class PreviewHomeComponent : HomeComponent {
                 instance = HomeComponent.Child.Todo(PreviewTodoComponent())
             )
         )
-
-    override fun onNotesClick() {
-    }
-
-    override fun onTodoClick() {
-    }
 }
 
 @Preview
